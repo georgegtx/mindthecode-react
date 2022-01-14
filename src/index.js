@@ -1,13 +1,39 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
+
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import Example from './routes/example/Example';
+import Home from './routes/home/Home';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+export const AppRoutes = [
+  {
+      name: 'Home',
+      component: <Home />,
+      href: '/'
+  },
+  {
+      name: 'Example',
+      component: <Example />,
+      href: '/example'
+  },
+]
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <Routes>
+      {
+        AppRoutes
+          .map(el => (<Route 
+                        key={el.href} 
+                        path={el.href} 
+                        element={el.component} />))
+      }
+    </Routes>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
